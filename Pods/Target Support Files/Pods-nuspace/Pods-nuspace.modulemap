@@ -1,0 +1,6 @@
+framework module Pods_nuspace {
+  umbrella header "Pods-nuspace-umbrella.h"
+
+  export *
+  module * { export * }
+}

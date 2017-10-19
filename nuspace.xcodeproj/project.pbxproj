@@ -1,0 +1,434 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9C2252911F98EB5B0029C818 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2252901F98EB5B0029C818 /* AppDelegate.swift */; };
+		9C2252961F98EB5B0029C818 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C2252941F98EB5B0029C818 /* Main.storyboard */; };
+		9C2252981F98EB5B0029C818 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C2252971F98EB5B0029C818 /* Assets.xcassets */; };
+		9C22529B1F98EB5B0029C818 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C2252991F98EB5B0029C818 /* LaunchScreen.storyboard */; };
+		9C2252A31F98ED860029C818 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2252A21F98ED860029C818 /* TabBarController.swift */; };
+		9C2252A51F98EE250029C818 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2252A41F98EE250029C818 /* Venue.swift */; };
+		9C2252A81F991D580029C818 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2252A71F991D580029C818 /* MapVC.swift */; };
+		9C2252AA1F991DB80029C818 /* EventPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2252A91F991DB80029C818 /* EventPageVC.swift */; };
+		9C2252AD1F9924C80029C818 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9C2252AC1F9924B40029C818 /* GoogleService-Info.plist */; };
+		AC1A26CD945086704C682442 /* Pods_nuspace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 491674D2EC29DC64C5DBA332 /* Pods_nuspace.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3F35484C0948500DB226F512 /* Pods-nuspace.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nuspace.debug.xcconfig"; path = "Pods/Target Support Files/Pods-nuspace/Pods-nuspace.debug.xcconfig"; sourceTree = "<group>"; };
+		491674D2EC29DC64C5DBA332 /* Pods_nuspace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nuspace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		50AA1BC51203447D81637AD6 /* Pods-nuspace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nuspace.release.xcconfig"; path = "Pods/Target Support Files/Pods-nuspace/Pods-nuspace.release.xcconfig"; sourceTree = "<group>"; };
+		9C22528D1F98EB5B0029C818 /* nuspace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nuspace.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C2252901F98EB5B0029C818 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9C2252951F98EB5B0029C818 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9C2252971F98EB5B0029C818 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9C22529A1F98EB5B0029C818 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9C22529C1F98EB5B0029C818 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9C2252A21F98ED860029C818 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		9C2252A41F98EE250029C818 /* Venue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
+		9C2252A71F991D580029C818 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
+		9C2252A91F991DB80029C818 /* EventPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPageVC.swift; sourceTree = "<group>"; };
+		9C2252AC1F9924B40029C818 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9C22528A1F98EB5B0029C818 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC1A26CD945086704C682442 /* Pods_nuspace.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4FD16952F5FC456A2BCC6817 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				491674D2EC29DC64C5DBA332 /* Pods_nuspace.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9C2252841F98EB5A0029C818 = {
+			isa = PBXGroup;
+			children = (
+				9C22528F1F98EB5B0029C818 /* nuspace */,
+				9C22528E1F98EB5B0029C818 /* Products */,
+				C0CE9B3A9FEEBCC991EEB0DB /* Pods */,
+				4FD16952F5FC456A2BCC6817 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		9C22528E1F98EB5B0029C818 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9C22528D1F98EB5B0029C818 /* nuspace.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9C22528F1F98EB5B0029C818 /* nuspace */ = {
+			isa = PBXGroup;
+			children = (
+				9C2252941F98EB5B0029C818 /* Main.storyboard */,
+				9C2252901F98EB5B0029C818 /* AppDelegate.swift */,
+				9C2252A21F98ED860029C818 /* TabBarController.swift */,
+				9C2252A71F991D580029C818 /* MapVC.swift */,
+				9C2252A41F98EE250029C818 /* Venue.swift */,
+				9C2252A91F991DB80029C818 /* EventPageVC.swift */,
+				9C2252971F98EB5B0029C818 /* Assets.xcassets */,
+				9C2252991F98EB5B0029C818 /* LaunchScreen.storyboard */,
+				9C22529C1F98EB5B0029C818 /* Info.plist */,
+				9C2252AC1F9924B40029C818 /* GoogleService-Info.plist */,
+			);
+			path = nuspace;
+			sourceTree = "<group>";
+		};
+		C0CE9B3A9FEEBCC991EEB0DB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3F35484C0948500DB226F512 /* Pods-nuspace.debug.xcconfig */,
+				50AA1BC51203447D81637AD6 /* Pods-nuspace.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9C22528C1F98EB5B0029C818 /* nuspace */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C22529F1F98EB5B0029C818 /* Build configuration list for PBXNativeTarget "nuspace" */;
+			buildPhases = (
+				E0CA643F0CA255F3CD58126C /* [CP] Check Pods Manifest.lock */,
+				9C2252891F98EB5B0029C818 /* Sources */,
+				9C22528A1F98EB5B0029C818 /* Frameworks */,
+				9C22528B1F98EB5B0029C818 /* Resources */,
+				1B90606C4179242556926A83 /* [CP] Embed Pods Frameworks */,
+				608C3D81805D731E9D7EE3DD /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = nuspace;
+			productName = nuspace;
+			productReference = 9C22528D1F98EB5B0029C818 /* nuspace.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9C2252851F98EB5A0029C818 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0900;
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = "Jonathon Vega";
+				TargetAttributes = {
+					9C22528C1F98EB5B0029C818 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 9C2252881F98EB5A0029C818 /* Build configuration list for PBXProject "nuspace" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9C2252841F98EB5A0029C818;
+			productRefGroup = 9C22528E1F98EB5B0029C818 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9C22528C1F98EB5B0029C818 /* nuspace */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9C22528B1F98EB5B0029C818 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C22529B1F98EB5B0029C818 /* LaunchScreen.storyboard in Resources */,
+				9C2252AD1F9924C80029C818 /* GoogleService-Info.plist in Resources */,
+				9C2252981F98EB5B0029C818 /* Assets.xcassets in Resources */,
+				9C2252961F98EB5B0029C818 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1B90606C4179242556926A83 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-nuspace/Pods-nuspace-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-nuspace/Pods-nuspace-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		608C3D81805D731E9D7EE3DD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-nuspace/Pods-nuspace-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E0CA643F0CA255F3CD58126C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-nuspace-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9C2252891F98EB5B0029C818 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C2252A31F98ED860029C818 /* TabBarController.swift in Sources */,
+				9C2252AA1F991DB80029C818 /* EventPageVC.swift in Sources */,
+				9C2252A81F991D580029C818 /* MapVC.swift in Sources */,
+				9C2252A51F98EE250029C818 /* Venue.swift in Sources */,
+				9C2252911F98EB5B0029C818 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		9C2252941F98EB5B0029C818 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9C2252951F98EB5B0029C818 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		9C2252991F98EB5B0029C818 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9C22529A1F98EB5B0029C818 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9C22529D1F98EB5B0029C818 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		9C22529E1F98EB5B0029C818 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9C2252A01F98EB5B0029C818 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F35484C0948500DB226F512 /* Pods-nuspace.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PUPPU9RL5K;
+				INFOPLIST_FILE = nuspace/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonathonvega.nuspace;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9C2252A11F98EB5B0029C818 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50AA1BC51203447D81637AD6 /* Pods-nuspace.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PUPPU9RL5K;
+				INFOPLIST_FILE = nuspace/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonathonvega.nuspace;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9C2252881F98EB5A0029C818 /* Build configuration list for PBXProject "nuspace" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C22529D1F98EB5B0029C818 /* Debug */,
+				9C22529E1F98EB5B0029C818 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9C22529F1F98EB5B0029C818 /* Build configuration list for PBXNativeTarget "nuspace" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C2252A01F98EB5B0029C818 /* Debug */,
+				9C2252A11F98EB5B0029C818 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9C2252851F98EB5A0029C818 /* Project object */;
+}
