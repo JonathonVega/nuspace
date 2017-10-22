@@ -8,7 +8,7 @@
 
 import MapKit
 
-class Venue: NSObject, MKAnnotation {
+class Event: NSObject, MKAnnotation {
     var title: String?
     var locationName: String?
     var coordinate: CLLocationCoordinate2D

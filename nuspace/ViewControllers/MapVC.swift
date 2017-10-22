@@ -120,6 +120,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate{
         mapView.showsUserLocation = true
     }
     
+    // Exit SearchBar Keyboard when touching screen
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         self.searchBar.endEditing(true)
@@ -136,8 +137,8 @@ extension MapVC: MKMapViewDelegate {
             return nil
         }
         
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "Venue") //?? ImageAnnotationView()
-        annotationView = ImageAnnotationView(annotation: annotation, reuseIdentifier: "Venue")
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "Event") //?? ImageAnnotationView()
+        annotationView = ImageAnnotationView(annotation: annotation, reuseIdentifier: "Event")
         let customAnnotation = annotation as! Venue
         annotationView?.image = customAnnotation.image//UIImage(named: "landscape")
         annotationView?.canShowCallout = true

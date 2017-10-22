@@ -12,10 +12,12 @@
 		9C2252981F98EB5B0029C818 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C2252971F98EB5B0029C818 /* Assets.xcassets */; };
 		9C22529B1F98EB5B0029C818 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C2252991F98EB5B0029C818 /* LaunchScreen.storyboard */; };
 		9C2252A31F98ED860029C818 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2252A21F98ED860029C818 /* TabBarController.swift */; };
-		9C2252A51F98EE250029C818 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2252A41F98EE250029C818 /* Venue.swift */; };
+		9C2252A51F98EE250029C818 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2252A41F98EE250029C818 /* Event.swift */; };
 		9C2252A81F991D580029C818 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2252A71F991D580029C818 /* MapVC.swift */; };
 		9C2252AA1F991DB80029C818 /* EventPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2252A91F991DB80029C818 /* EventPageVC.swift */; };
 		9C2252AD1F9924C80029C818 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9C2252AC1F9924B40029C818 /* GoogleService-Info.plist */; };
+		9C2252B11F9C395B0029C818 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2252B01F9C395B0029C818 /* ListVC.swift */; };
+		9C2252B51F9C43510029C818 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2252B41F9C43510029C818 /* EventTableViewCell.swift */; };
 		AC1A26CD945086704C682442 /* Pods_nuspace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 491674D2EC29DC64C5DBA332 /* Pods_nuspace.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,10 +32,12 @@
 		9C22529A1F98EB5B0029C818 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C22529C1F98EB5B0029C818 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C2252A21F98ED860029C818 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		9C2252A41F98EE250029C818 /* Venue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
+		9C2252A41F98EE250029C818 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		9C2252A71F991D580029C818 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		9C2252A91F991DB80029C818 /* EventPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPageVC.swift; sourceTree = "<group>"; };
 		9C2252AC1F9924B40029C818 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9C2252B01F9C395B0029C818 /* ListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
+		9C2252B41F9C43510029C818 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,15 +84,41 @@
 				9C2252941F98EB5B0029C818 /* Main.storyboard */,
 				9C2252901F98EB5B0029C818 /* AppDelegate.swift */,
 				9C2252A21F98ED860029C818 /* TabBarController.swift */,
-				9C2252A71F991D580029C818 /* MapVC.swift */,
-				9C2252A41F98EE250029C818 /* Venue.swift */,
-				9C2252A91F991DB80029C818 /* EventPageVC.swift */,
+				9C2252B21F9C3C670029C818 /* ViewControllers */,
+				9C2252B31F9C42A50029C818 /* Model */,
+				9C2252B61F9C43560029C818 /* Table View Cells */,
+				9C2252A41F98EE250029C818 /* Event.swift */,
 				9C2252971F98EB5B0029C818 /* Assets.xcassets */,
 				9C2252991F98EB5B0029C818 /* LaunchScreen.storyboard */,
 				9C22529C1F98EB5B0029C818 /* Info.plist */,
 				9C2252AC1F9924B40029C818 /* GoogleService-Info.plist */,
 			);
 			path = nuspace;
+			sourceTree = "<group>";
+		};
+		9C2252B21F9C3C670029C818 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9C2252B01F9C395B0029C818 /* ListVC.swift */,
+				9C2252A71F991D580029C818 /* MapVC.swift */,
+				9C2252A91F991DB80029C818 /* EventPageVC.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9C2252B31F9C42A50029C818 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9C2252B61F9C43560029C818 /* Table View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				9C2252B41F9C43510029C818 /* EventTableViewCell.swift */,
+			);
+			path = "Table View Cells";
 			sourceTree = "<group>";
 		};
 		C0CE9B3A9FEEBCC991EEB0DB /* Pods */ = {
@@ -238,10 +268,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C2252B11F9C395B0029C818 /* ListVC.swift in Sources */,
 				9C2252A31F98ED860029C818 /* TabBarController.swift in Sources */,
 				9C2252AA1F991DB80029C818 /* EventPageVC.swift in Sources */,
 				9C2252A81F991D580029C818 /* MapVC.swift in Sources */,
-				9C2252A51F98EE250029C818 /* Venue.swift in Sources */,
+				9C2252B51F9C43510029C818 /* EventTableViewCell.swift in Sources */,
+				9C2252A51F98EE250029C818 /* Event.swift in Sources */,
 				9C2252911F98EB5B0029C818 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
