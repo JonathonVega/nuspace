@@ -9,8 +9,11 @@
 import UIKit
 import FirebaseDatabase
 
-class ListVC: UIViewController, UISearchBarDelegate {
+class ListVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
+    @IBOutlet weak var tableView: UITableView!
+    
+    
     var searchBar:UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 440, height: 40))
     
     var ref: DatabaseReference!
@@ -23,8 +26,13 @@ class ListVC: UIViewController, UISearchBarDelegate {
         ref = Database.database().reference()
         
         searchBar.placeholder = "Search for Places"
+        tableView.delegate = self
+        tableView.dataSource = self
         searchBar.delegate = self
         self.navigationItem.titleView = searchBar
+        
+        self.tableView.keyboardDismissMode = .onDrag
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,10 +40,21 @@ class ListVC: UIViewController, UISearchBarDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    // Exit SearchBar Keyboard when touching screen
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        self.searchBar.endEditing(true)
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 0
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 25
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        
+        // Configure the cell...
+        
+        return cell
+    }
+    
 
 }

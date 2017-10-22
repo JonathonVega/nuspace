@@ -91,7 +91,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate{
                     
                     let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                     
-                    let annotation = Venue(title: title, locationName: locationName, coordinate: location)
+                    let annotation = Event(title: title, locationName: locationName, coordinate: location)
                     
                     self.mapView.addAnnotation(annotation)
                     
@@ -125,6 +125,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate{
         super.touchesBegan(touches, with: event)
         self.searchBar.endEditing(true)
     }
+    
 }
 
 
@@ -139,7 +140,7 @@ extension MapVC: MKMapViewDelegate {
         
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "Event") //?? ImageAnnotationView()
         annotationView = ImageAnnotationView(annotation: annotation, reuseIdentifier: "Event")
-        let customAnnotation = annotation as! Venue
+        let customAnnotation = annotation as! Event
         annotationView?.image = customAnnotation.image//UIImage(named: "landscape")
         annotationView?.canShowCallout = true
         annotationView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)

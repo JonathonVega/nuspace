@@ -1,17 +1,15 @@
 //
-//  EventTableViewCell.swift
+//  EntityTableViewCell.swift
 //  nuspace
 //
-//  Created by Jonathon F Vega on 10/21/17.
+//  Created by Jonathon F Vega on 10/22/17.
 //  Copyright © 2017 Jonathon Vega. All rights reserved.
 //
 
 import UIKit
 
-class EventTableViewCell: UITableViewCell {
-    
-    @IBOutlet weak var EventImage: UIImageView!
-    
+class EntityTableViewCell: UITableViewCell {
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -1,5 +1,5 @@
 //
-//  Venue.swift
+//  Event.swift
 //  nuspace
 //
 //  Created by Jonathon F Vega on 10/19/17.

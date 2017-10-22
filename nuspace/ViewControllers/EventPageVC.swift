@@ -20,10 +20,5 @@ class EventPageVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    @IBAction func exitButton(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
-    }
 
 }
