@@ -22,15 +22,15 @@ class TabBarController: UITabBarController {
         button.setTitleColor(.yellow, for: .highlighted)
         //button.frame = CGRect(x: 100, y: 0, width: 44, height: 44)
         button.backgroundColor = .blue
-        button.layer.borderWidth = 4
-        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor(white: 0.0, alpha: 1.0).cgColor
         self.view.insertSubview(button, aboveSubview: self.tabBar)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        button.frame = CGRect.init(x: self.tabBar.center.x - 32, y: self.view.bounds.height - 65, width: 70, height: 64)
-        button.layer.cornerRadius = 20
+        button.frame = CGRect.init(x: self.tabBar.center.x - 40, y: self.view.bounds.height - 50, width: 80, height: 50)
+        button.layer.cornerRadius = 10
     }
     
     override func didReceiveMemoryWarning() {

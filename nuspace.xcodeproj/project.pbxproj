@@ -19,6 +19,7 @@
 		9C2252B11F9C395B0029C818 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2252B01F9C395B0029C818 /* ListVC.swift */; };
 		9C2252B51F9C43510029C818 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2252B41F9C43510029C818 /* EventTableViewCell.swift */; };
 		9C2252B81F9C554C0029C818 /* EntityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2252B71F9C554C0029C818 /* EntityTableViewCell.swift */; };
+		9C821A151F9FE8DC0094C623 /* DistantAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C821A141F9FE8DC0094C623 /* DistantAnnotationView.swift */; };
 		AC1A26CD945086704C682442 /* Pods_nuspace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 491674D2EC29DC64C5DBA332 /* Pods_nuspace.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		9C2252B01F9C395B0029C818 /* ListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
 		9C2252B41F9C43510029C818 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		9C2252B71F9C554C0029C818 /* EntityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityTableViewCell.swift; sourceTree = "<group>"; };
+		9C821A141F9FE8DC0094C623 /* DistantAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistantAnnotationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				9C2252A41F98EE250029C818 /* Event.swift */,
+				9C821A141F9FE8DC0094C623 /* DistantAnnotationView.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -214,6 +217,8 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-nuspace/Pods-nuspace-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework",
+				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -222,6 +227,8 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapbox.framework",
+				"${DWARF_DSYM_FOLDER_PATH}/Mapbox.framework.dSYM",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -273,6 +280,7 @@
 			files = (
 				9C2252B11F9C395B0029C818 /* ListVC.swift in Sources */,
 				9C2252A31F98ED860029C818 /* TabBarController.swift in Sources */,
+				9C821A151F9FE8DC0094C623 /* DistantAnnotationView.swift in Sources */,
 				9C2252AA1F991DB80029C818 /* EventPageVC.swift in Sources */,
 				9C2252A81F991D580029C818 /* MapVC.swift in Sources */,
 				9C2252B81F9C554C0029C818 /* EntityTableViewCell.swift in Sources */,

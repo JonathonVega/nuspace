@@ -12,5 +12,6 @@ pod ‘Firebase/Messaging’
 pod ‘Firebase/Database’
 pod ‘Firebase/Auth’
 pod ‘Firebase/Storage’
+pod 'Mapbox-iOS-SDK', '~> 3.6'
 
 end

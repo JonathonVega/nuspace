@@ -38,7 +38,7 @@ class ImageAnnotationView: MKAnnotationView {
     }
 }
 
-class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate{
+class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, MKMapViewDelegate{
     
     @IBOutlet weak var mapView: MKMapView!
     let locationManager = CLLocationManager()
@@ -50,6 +50,8 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate{
     var distance: Int = 10
     
     var ref: DatabaseReference!
+    
+    var mapAnnotations: [Event] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +68,9 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate{
         self.navigationItem.titleView = searchBar // or use self.navigationcontroller.topItem?.titleView = searchBar
         
         updateMapWithAnnotations()
+        print("Does it work")
+        //print(self.mapAnnotations)
+        //mapView.addAnnotations(mapAnnotations)
     }
     
     override func didReceiveMemoryWarning() {
@@ -74,6 +79,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate{
     }
     
     func updateMapWithAnnotations() {
+        var annotationsArray = [Event]()
         ref.child("Events").observe(.value) { (snapshot) in
             if ( snapshot.value is NSNull ) {
                 print("not found")
@@ -84,21 +90,35 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate{
                     let snap = child as! DataSnapshot //each child is a snapshot
                     let dict = snap.value as! [String: Any] // the value is a dict
                     
-                    let title = dict["Title"] as! String
-                    let locationName = dict["LocationName"] as! String
+                    let title = dict["EventTitle"] as! String
+                    let locationName = dict["EventLocation"] as! String
                     let longitude = dict["Longitude"] as! Double
                     let latitude = dict["Latitude"] as! Double
                     
                     let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                     
                     let annotation = Event(title: title, locationName: locationName, coordinate: location)
+                    print("K")
+                    print(annotation)
+                    annotationsArray.append(annotation)
+                    //self.mapAnnotations.append(annotation)
                     
-                    self.mapView.addAnnotation(annotation)
+                    //self.mapView.addAnnotation(annotation)
+                    
                     
                     print("\(title) will be at \(locationName)") // Set new rules later in firebase: "auth != null"
                 }
+                //print(self.mapAnnotations)
             }
+            print("Lets see")
+            print(annotationsArray)
+            self.mapView.addAnnotations(annotationsArray)
+            self.mapAnnotations = annotationsArray
+            print("Cool")
+            print(self.mapAnnotations)
         }
+        //self.mapView.addAnnotations(self.mapAnnotations)
+        print(self.mapAnnotations)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -119,32 +139,28 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate{
         
         mapView.showsUserLocation = true
     }
-    
-    // Exit SearchBar Keyboard when touching screen
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        self.searchBar.endEditing(true)
-    }
-    
-}
 
-
-extension MapVC: MKMapViewDelegate {
-    
-    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         if annotation is MKUserLocation {
             return nil
         }
         
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "Event") //?? ImageAnnotationView()
-        annotationView = ImageAnnotationView(annotation: annotation, reuseIdentifier: "Event")
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "Event")
+        annotationView = DistantAnnotationView(annotation: annotation, reuseIdentifier: "Event")
         let customAnnotation = annotation as! Event
-        annotationView?.image = customAnnotation.image//UIImage(named: "landscape")
+        annotationView?.image = customAnnotation.image
         annotationView?.canShowCallout = true
         annotationView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         return annotationView
+        
+        /*var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "Event") //?? ImageAnnotationView()
+         annotationView = ImageAnnotationView(annotation: annotation, reuseIdentifier: "Event")
+         let customAnnotation = annotation as! Event
+         annotationView?.image = customAnnotation.image//UIImage(named: "landscape")
+         annotationView?.canShowCallout = true
+         annotationView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+         return annotationView*/
         
     }
     
@@ -154,8 +170,60 @@ extension MapVC: MKMapViewDelegate {
         }
     }
     
+    func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
+        // Disable touch on userLocation Annotation
+        if let currentUser: MKAnnotationView = mapView.view(for: mapView.userLocation) {
+            currentUser.isEnabled = false
+        }
+        
+    }
     
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        if mapView.region.span.latitudeDelta <= 0.015 {
+            print("Coolio")
+            print(mapView.annotations)
+            for eventAnnotation in mapView.annotations {
+                if eventAnnotation is MKUserLocation {
+                    continue
+                }
+                print("Hope")
+                mapView.removeAnnotation(eventAnnotation)
+                let x = eventAnnotation.title
+                /*let eventView = mapView.view(for: eventAnnotation)
+                print(eventView!)*/
+                print(x!!)
+                print("Heres one")
+            }
+        } else if mapView.region.span.latitudeDelta >= 0.016 {
+            print("Out in the distance")
+            for eventAnnotation in mapView.annotations {
+                print("Hope")
+                mapView.addAnnotations(mapAnnotations)
+                let x = eventAnnotation.title
+                /*let eventView = mapView.view(for: eventAnnotation)
+                 print(eventView!)*/
+                print(x!!)
+                print("Heres one")
+            }
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        let imageView = view as! DistantAnnotationView
+        imageView.imageView.alpha = 0.0
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let selectedView = view as! DistantAnnotationView
+        selectedView.imageView.alpha = 1.0
+        
+    }
+    
+    // Exit SearchBar Keyboard when touching screen
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.searchBar.endEditing(true)
+    }
     
 }
-
 
