@@ -38,6 +38,26 @@ class DistantAnnotationView: MKAnnotationView {
         }
     }
     
+    func showImage() {
+        imageView.alpha = 1.0
+        layer.borderWidth = 0
+        backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.0)
+        imageView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        frame.size = CGSize(width: 50, height: 50)
+        frame.origin = CGPoint(x: frame.origin.x - 20, y: frame.origin.y - 20)
+        
+    }
+    
+    func hideImage() {
+        imageView.alpha = 0.0
+        layer.borderWidth = 1
+        backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        imageView.frame = CGRect(x: -20, y: -20, width: 50, height: 50)
+        frame.origin = CGPoint(x: frame.origin.x + 20, y: frame.origin.y + 20)
+        frame.size = CGSize(width: 10, height: 10)
+
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

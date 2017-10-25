@@ -68,9 +68,6 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
         self.navigationItem.titleView = searchBar // or use self.navigationcontroller.topItem?.titleView = searchBar
         
         updateMapWithAnnotations()
-        print("Does it work")
-        //print(self.mapAnnotations)
-        //mapView.addAnnotations(mapAnnotations)
     }
     
     override func didReceiveMemoryWarning() {
@@ -101,12 +98,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
                     print("K")
                     print(annotation)
                     annotationsArray.append(annotation)
-                    //self.mapAnnotations.append(annotation)
-                    
-                    //self.mapView.addAnnotation(annotation)
-                    
-                    
-                    print("\(title) will be at \(locationName)") // Set new rules later in firebase: "auth != null"
+                    //print("\(title) will be at \(locationName)") // Set new rules later in firebase: "auth != null"
                 }
                 //print(self.mapAnnotations)
             }
@@ -135,7 +127,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
             appJustOpened = false
         }
         
-        print(mapView.region)
+        //print(mapView.region)
         
         mapView.showsUserLocation = true
     }
@@ -144,23 +136,24 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
         
         if annotation is MKUserLocation {
             return nil
+        } else if (annotation as! Event).isDistant {
+            print("YES IT IS")
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "Event")
+            annotationView = DistantAnnotationView(annotation: annotation, reuseIdentifier: "Event")
+            let customAnnotation = annotation as! Event
+            annotationView?.image = customAnnotation.image
+            annotationView?.canShowCallout = false
+            annotationView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            return annotationView
+        } else {
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "Event")
+            annotationView = ImageAnnotationView(annotation: annotation, reuseIdentifier: "Event")
+            let customAnnotation = annotation as! Event
+            annotationView?.image = customAnnotation.image
+            annotationView?.canShowCallout = false
+            annotationView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            return annotationView
         }
-        
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "Event")
-        annotationView = DistantAnnotationView(annotation: annotation, reuseIdentifier: "Event")
-        let customAnnotation = annotation as! Event
-        annotationView?.image = customAnnotation.image
-        annotationView?.canShowCallout = true
-        annotationView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-        return annotationView
-        
-        /*var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "Event") //?? ImageAnnotationView()
-         annotationView = ImageAnnotationView(annotation: annotation, reuseIdentifier: "Event")
-         let customAnnotation = annotation as! Event
-         annotationView?.image = customAnnotation.image//UIImage(named: "landscape")
-         annotationView?.canShowCallout = true
-         annotationView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-         return annotationView*/
         
     }
     
@@ -178,47 +171,67 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
         
     }
     
+    // Change annotation views when zoomed in or out
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         if mapView.region.span.latitudeDelta <= 0.015 {
-            print("Coolio")
-            print(mapView.annotations)
             for eventAnnotation in mapView.annotations {
                 if eventAnnotation is MKUserLocation {
                     continue
+                } else if !(eventAnnotation as! Event).isDistant{
+                    break
                 }
-                print("Hope")
-                mapView.removeAnnotation(eventAnnotation)
-                let x = eventAnnotation.title
-                /*let eventView = mapView.view(for: eventAnnotation)
-                print(eventView!)*/
-                print(x!!)
-                print("Heres one")
+                if mapView.selectedAnnotations.isEmpty {
+                    mapView.removeAnnotation(eventAnnotation)
+                    (eventAnnotation as! Event).isDistant = false
+                    mapView.addAnnotation(eventAnnotation)
+                } else {
+                    let selectedAnnotation = mapView.selectedAnnotations.first
+                    mapView.removeAnnotation(eventAnnotation)
+                    (eventAnnotation as! Event).isDistant = false
+                    mapView.addAnnotation(eventAnnotation)
+                    if (selectedAnnotation as! Event) == (eventAnnotation as! Event) {
+                        mapView.selectAnnotation(eventAnnotation, animated: false)
+                    }
+                }
             }
-        } else if mapView.region.span.latitudeDelta >= 0.016 {
-            print("Out in the distance")
+        } else if mapView.region.span.latitudeDelta > 0.015 {
             for eventAnnotation in mapView.annotations {
-                print("Hope")
-                mapView.addAnnotations(mapAnnotations)
-                let x = eventAnnotation.title
-                /*let eventView = mapView.view(for: eventAnnotation)
-                 print(eventView!)*/
-                print(x!!)
-                print("Heres one")
+                if eventAnnotation is MKUserLocation {
+                    continue
+                } else if (eventAnnotation as! Event).isDistant{
+                    break
+                }
+                if mapView.selectedAnnotations.isEmpty {
+                    mapView.removeAnnotation(eventAnnotation)
+                    (eventAnnotation as! Event).isDistant = true
+                    mapView.addAnnotation(eventAnnotation)
+                } else {
+                    let selectedAnnotation = mapView.selectedAnnotations.first
+                    mapView.removeAnnotation(eventAnnotation)
+                    (eventAnnotation as! Event).isDistant = true
+                    mapView.addAnnotation(eventAnnotation)
+                    if (selectedAnnotation as! Event) == (eventAnnotation as! Event) {
+                        mapView.selectAnnotation(eventAnnotation, animated: false)
+                    }
+                }
             }
         }
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        let imageView = view as! DistantAnnotationView
-        imageView.imageView.alpha = 0.0
+        if view is DistantAnnotationView {
+            let selectedView = view as! DistantAnnotationView
+            selectedView.hideImage()
+        }
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        let selectedView = view as! DistantAnnotationView
-        selectedView.imageView.alpha = 1.0
-        
+        if view is DistantAnnotationView {
+            let selectedView = view as! DistantAnnotationView
+            selectedView.showImage()
+        }
     }
-    
+
     // Exit SearchBar Keyboard when touching screen
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)

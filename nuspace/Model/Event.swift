@@ -13,12 +13,14 @@ class Event: NSObject, MKAnnotation {
     var locationName: String?
     var coordinate: CLLocationCoordinate2D
     var image: UIImage?
+    var isDistant: Bool
     
     init(title: String, locationName: String?, coordinate: CLLocationCoordinate2D) {
         self.title = title
         self.locationName = locationName
         self.coordinate = coordinate
         self.image = UIImage(named: "landscape")
+        self.isDistant = true
         
         super.init()
     }
@@ -26,5 +28,7 @@ class Event: NSObject, MKAnnotation {
     var subtitle: String? {
         return locationName
     }
+    
+    
     
 }
