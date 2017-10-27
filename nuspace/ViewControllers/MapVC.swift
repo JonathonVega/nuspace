@@ -25,6 +25,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
     var ref: DatabaseReference!
     
     var mapAnnotations: [Event] = []
+    var bottomEventView: EventBottomSheetView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
         self.navigationItem.titleView = searchBar // or use self.navigationcontroller.topItem?.titleView = searchBar
         
         updateMapWithAnnotations()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,8 +51,12 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
     }
     
     func updateMapWithAnnotations() {
+        //let allAnnotations = self.mapView.annotations
+        
         var annotationsArray = [Event]()
         ref.child("Events").observe(.value) { (snapshot) in
+            print("Does it go through here")
+            self.mapView.removeAnnotations(self.mapAnnotations)
             if ( snapshot.value is NSNull ) {
                 print("not found")
             } else {
@@ -68,27 +74,28 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
                     let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                     
                     let annotation = Event(title: title, locationName: locationName, coordinate: location)
-                    print("K")
-                    print(annotation)
                     annotationsArray.append(annotation)
                     //print("\(title) will be at \(locationName)") // Set new rules later in firebase: "auth != null"
                 }
-                //print(self.mapAnnotations)
             }
-            print("Lets see")
             print(annotationsArray)
-            self.mapView.addAnnotations(annotationsArray)
-            self.mapAnnotations = annotationsArray
-            print("Cool")
             print(self.mapAnnotations)
+            
+            for annotation in annotationsArray {
+                print(self.mapAnnotations.contains(annotation))
+                if !self.mapAnnotations.contains(annotation) {
+                    //self.mapView.addAnnotations(annotationsArray)
+                    self.mapView.addAnnotation(annotation)
+                }
+            }
+            
+            self.mapAnnotations = annotationsArray
+            annotationsArray.removeAll()
         }
-        //self.mapView.addAnnotations(self.mapAnnotations)
-        print(self.mapAnnotations)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[0]
-        //let flocaito = locations.first
         myLocationLatitude = location.coordinate.latitude
         myLocationLongitude = location.coordinate.longitude
         
@@ -104,13 +111,15 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
         
         mapView.showsUserLocation = true
     }
+    
+    
+    // MARK: - MapView Delegate
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         if annotation is MKUserLocation {
             return nil
         } else if (annotation as! Event).isDistant {
-            print("YES IT IS")
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "Event")
             annotationView = DistantAnnotationView(annotation: annotation, reuseIdentifier: "Event")
             let customAnnotation = annotation as! Event
@@ -196,6 +205,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
             let selectedView = view as! DistantAnnotationView
             selectedView.hideImage()
         }
+        bottomEventView?.removeFromSuperview()
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
@@ -203,8 +213,32 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
             let selectedView = view as! DistantAnnotationView
             selectedView.showImage()
         }
+        let chosenEvent = view.annotation as! Event
+        addBottomSheetView(event: chosenEvent)
     }
 
+    
+    // MARK: - Event Detail Bottom Sheet
+    
+    func addBottomSheetView(event: Event) {
+        // 1- Init bottomSheetVC
+        
+        bottomEventView = EventBottomSheetView(event: event)
+        
+        // 2- Add bottomSheetVC as a child view
+        self.view.addSubview((bottomEventView)!)
+        
+        // 3- Adjust bottomSheet frame and initial position.
+        //let height = view.frame.height
+        //let width  = view.frame.width
+        //bottomEventView?.view.frame = CGRect(x: 0, y: self.view.frame.maxY, width: width, height: height)
+
+        
+    }
+    
+    
+    // MARK: - Other Methods
+    
     // Exit SearchBar Keyboard when touching screen
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
