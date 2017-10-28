@@ -27,6 +27,14 @@
                                     <segue destination="yPQ-eh-ZAC" kind="embed" id="244-Gb-a5b"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G2U-ra-aMH">
+                                <rect key="frame" x="329" y="81" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="refreshButton"/>
+                                <connections>
+                                    <action selector="refreshMap:" destination="Lzy-un-wo0" eventType="touchUpInside" id="ZAr-ex-OPJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -360,6 +368,9 @@
             <point key="canvasLocation" x="2061.5999999999999" y="-392.65367316341832"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="refreshButton" width="240" height="240"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="oPp-7K-eot"/>
         <segue reference="v7t-j2-FsM"/>

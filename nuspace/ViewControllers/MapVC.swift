@@ -55,7 +55,6 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
         
         var annotationsArray = [Event]()
         ref.child("Events").observe(.value) { (snapshot) in
-            print("Does it go through here")
             self.mapView.removeAnnotations(self.mapAnnotations)
             if ( snapshot.value is NSNull ) {
                 print("not found")
@@ -78,13 +77,9 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
                     //print("\(title) will be at \(locationName)") // Set new rules later in firebase: "auth != null"
                 }
             }
-            print(annotationsArray)
-            print(self.mapAnnotations)
-            
             for annotation in annotationsArray {
                 print(self.mapAnnotations.contains(annotation))
                 if !self.mapAnnotations.contains(annotation) {
-                    //self.mapView.addAnnotations(annotationsArray)
                     self.mapView.addAnnotation(annotation)
                 }
             }
@@ -98,6 +93,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
         let location = locations[0]
         myLocationLatitude = location.coordinate.latitude
         myLocationLongitude = location.coordinate.longitude
+        print(location)
         
         if appJustOpened == true {
             let span: MKCoordinateSpan = MKCoordinateSpanMake(0.1, 0.1)
@@ -232,17 +228,62 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
         //let height = view.frame.height
         //let width  = view.frame.width
         //bottomEventView?.view.frame = CGRect(x: 0, y: self.view.frame.maxY, width: width, height: height)
-
-        
     }
     
     
     // MARK: - Other Methods
     
+    
+    
+    @IBAction func refreshMap(_ sender: UIButton) {
+        var annotationsArray = [Event]()
+        ref.child("Events").observe(.value) { (snapshot) in
+            self.mapView.removeAnnotations(self.mapAnnotations)
+            if ( snapshot.value is NSNull ) {
+                print("not found")
+            } else {
+                
+                for child in (snapshot.children) {
+                    
+                    let snap = child as! DataSnapshot //each child is a snapshot
+                    let dict = snap.value as! [String: Any] // the value is a dict
+                    
+                    let title = dict["EventTitle"] as! String
+                    let locationName = dict["EventLocation"] as! String
+                    let longitude = dict["Longitude"] as! Double
+                    let latitude = dict["Latitude"] as! Double
+                    
+                    let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                    
+                    if self.isCoordinateInsideRegion(region: self.mapView.region, coordinate: location) {
+                        let annotation = Event(title: title, locationName: locationName, coordinate: location)
+                        self.mapView.addAnnotation(annotation)
+                        annotationsArray.append(annotation)
+                    }
+                    
+                    //print("\(title) will be at \(locationName)") // Set new rules later in firebase: "auth != null"
+                }
+                self.mapAnnotations = annotationsArray
+                annotationsArray.removeAll()
+            }
+        }
+    }
+    
     // Exit SearchBar Keyboard when touching screen
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         self.searchBar.endEditing(true)
+    }
+    
+    func isCoordinateInsideRegion(region: MKCoordinateRegion, coordinate: CLLocationCoordinate2D) -> Bool {
+        let southEdge = region.center.latitude - (region.span.latitudeDelta/2)
+        let northEdge = region.center.latitude + (region.span.latitudeDelta/2)
+        let westEdge = region.center.longitude - (region.span.longitudeDelta/2)
+        let eastEdge = region.center.longitude + (region.span.longitudeDelta/2)
+        if southEdge <= coordinate.latitude && northEdge >= coordinate.latitude && westEdge <= coordinate.longitude && eastEdge >= coordinate.longitude {
+            return true
+        }
+        return false
     }
     
 }
