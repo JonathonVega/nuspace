@@ -6,6 +6,11 @@
 //  Copyright © 2017 Jonathon Vega. All rights reserved.
 //
 
+
+
+// TODO:
+// Need to set new rules later in firebase: "auth != null"
+
 import UIKit
 import MapKit
 import CoreLocation
@@ -14,6 +19,9 @@ import FirebaseDatabase
 class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, MKMapViewDelegate{
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var bottomSheet: UIView!
+    
+    
     let locationManager = CLLocationManager()
     var searchBar:UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 440, height: 40))
     
@@ -37,6 +45,8 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
         locationManager.startUpdatingLocation()
         
         
+        //searchController.searchBar.frame(CGRect(x: 0, y: 0, width: 440, height: 40))
+        
         searchBar.placeholder = "Search for Places"
         searchBar.delegate = self
         self.navigationItem.titleView = searchBar // or use self.navigationcontroller.topItem?.titleView = searchBar
@@ -52,48 +62,13 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
     
     func updateMapWithAnnotations() {
         //let allAnnotations = self.mapView.annotations
-        
-        var annotationsArray = [Event]()
-        ref.child("Events").observe(.value) { (snapshot) in
-            self.mapView.removeAnnotations(self.mapAnnotations)
-            if ( snapshot.value is NSNull ) {
-                print("not found")
-            } else {
-                
-                for child in (snapshot.children) {
-                    
-                    let snap = child as! DataSnapshot //each child is a snapshot
-                    let dict = snap.value as! [String: Any] // the value is a dict
-                    
-                    let title = dict["EventTitle"] as! String
-                    let locationName = dict["EventLocation"] as! String
-                    let longitude = dict["Longitude"] as! Double
-                    let latitude = dict["Latitude"] as! Double
-                    
-                    let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                    
-                    let annotation = Event(title: title, locationName: locationName, coordinate: location)
-                    annotationsArray.append(annotation)
-                    //print("\(title) will be at \(locationName)") // Set new rules later in firebase: "auth != null"
-                }
-            }
-            for annotation in annotationsArray {
-                print(self.mapAnnotations.contains(annotation))
-                if !self.mapAnnotations.contains(annotation) {
-                    self.mapView.addAnnotation(annotation)
-                }
-            }
-            
-            self.mapAnnotations = annotationsArray
-            annotationsArray.removeAll()
-        }
+        fillMapViewWithAnnotationsFromFirebase()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[0]
         myLocationLatitude = location.coordinate.latitude
         myLocationLongitude = location.coordinate.longitude
-        print(location)
         
         if appJustOpened == true {
             let span: MKCoordinateSpan = MKCoordinateSpanMake(0.1, 0.1)
@@ -231,13 +206,12 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
     }
     
     
-    // MARK: - Other Methods
+    // MARK: - Firebase Call Methods
     
-    
-    
-    @IBAction func refreshMap(_ sender: UIButton) {
+    // Used to fill the mapAnnotation's global array AND fill in the map with those annotations
+    func fillMapViewWithAnnotationsFromFirebase() {
         var annotationsArray = [Event]()
-        ref.child("Events").observe(.value) { (snapshot) in
+        ref.child("Events").observeSingleEvent(of: .value) { (snapshot) in
             self.mapView.removeAnnotations(self.mapAnnotations)
             if ( snapshot.value is NSNull ) {
                 print("not found")
@@ -250,17 +224,17 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
                     
                     let title = dict["EventTitle"] as! String
                     let locationName = dict["EventLocation"] as! String
+                    let eventDescription = dict["EventDescription"] as! String
                     let longitude = dict["Longitude"] as! Double
                     let latitude = dict["Latitude"] as! Double
                     
                     let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                     
                     if self.isCoordinateInsideRegion(region: self.mapView.region, coordinate: location) {
-                        let annotation = Event(title: title, locationName: locationName, coordinate: location)
+                        let annotation = Event(title: title, locationName: locationName, eventDescription: eventDescription, coordinate: location)
                         self.mapView.addAnnotation(annotation)
                         annotationsArray.append(annotation)
                     }
-                    
                     //print("\(title) will be at \(locationName)") // Set new rules later in firebase: "auth != null"
                 }
                 self.mapAnnotations = annotationsArray
@@ -269,11 +243,86 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
         }
     }
     
+    // Use to filter data through searchBar
+    func getFilteredAnnotations(searchText: String) {
+        var filteredData = [Event]()
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        ref.child("Events").observeSingleEvent(of: .value) { (snapshot) in
+            if ( snapshot.value is NSNull ) {
+                print("not found")
+            } else {
+                
+                for child in (snapshot.children) {
+                    
+                    let snap = child as! DataSnapshot //each child is a snapshot
+                    let dict = snap.value as! [String: Any] // the value is a dict
+                    
+                    let title = dict["EventTitle"] as! String
+                    let locationName = dict["EventLocation"] as! String
+                    let eventDescription = dict["EventDescription"] as! String
+                    let longitude = dict["Longitude"] as! Double
+                    let latitude = dict["Latitude"] as! Double
+                    
+                    let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                    
+                    if self.isCoordinateInsideRegion(region: self.mapView.region, coordinate: location) && ((title.lowercased().range(of: searchText) != nil) || ((locationName.lowercased().range(of: searchText) != nil))){
+                        let annotation = Event(title: title, locationName: locationName, eventDescription: eventDescription, coordinate: location)
+                        print(title)
+                        filteredData.append(annotation)
+                    }
+                    
+                }
+            }
+            print("Filtered")
+            print(filteredData)
+            self.mapView.addAnnotations(filteredData)
+        }
+    }
+    
+    
+    // MARK: - Search Bar
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        // Activity Indicator
+        /*let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()*/
+        
+        // Hide search bar
+        self.searchBar.resignFirstResponder()
+        dismiss(animated: true, completion: nil)
+        
+        // Filter through data
+        let searchText = searchBar.text?.lowercased()
+        getFilteredAnnotations(searchText: searchText!)
+        print(mapAnnotations)
+        print("Cool")
+        
+        //self.mapView.removeAnnotations(self.mapAnnotations)
+        print("First")
+        //print(mapView.annotations)
+        print("Second")
+    }
+    
+    
+    
+    
     // Exit SearchBar Keyboard when touching screen
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         self.searchBar.endEditing(true)
     }
+    
+    // MARK: - Other Methods
+    
+    @IBAction func refreshMap(_ sender: UIButton) {
+        fillMapViewWithAnnotationsFromFirebase()
+    }
+    
+    
     
     func isCoordinateInsideRegion(region: MKCoordinateRegion, coordinate: CLLocationCoordinate2D) -> Bool {
         let southEdge = region.center.latitude - (region.span.latitudeDelta/2)
