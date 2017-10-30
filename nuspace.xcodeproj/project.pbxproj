@@ -20,7 +20,6 @@
 		9C2252B51F9C43510029C818 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2252B41F9C43510029C818 /* EventTableViewCell.swift */; };
 		9C2252B81F9C554C0029C818 /* EntityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2252B71F9C554C0029C818 /* EntityTableViewCell.swift */; };
 		9C821A151F9FE8DC0094C623 /* DistantAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C821A141F9FE8DC0094C623 /* DistantAnnotationView.swift */; };
-		9C821A171FA146240094C623 /* EventBottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C821A161FA146240094C623 /* EventBottomSheetVC.swift */; };
 		9C821A191FA146450094C623 /* ImageAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C821A181FA146450094C623 /* ImageAnnotationView.swift */; };
 		9C821A1B1FA250140094C623 /* EventBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C821A1A1FA250130094C623 /* EventBottomSheetView.swift */; };
 		AC1A26CD945086704C682442 /* Pods_nuspace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 491674D2EC29DC64C5DBA332 /* Pods_nuspace.framework */; };
@@ -45,7 +44,6 @@
 		9C2252B41F9C43510029C818 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		9C2252B71F9C554C0029C818 /* EntityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityTableViewCell.swift; sourceTree = "<group>"; };
 		9C821A141F9FE8DC0094C623 /* DistantAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistantAnnotationView.swift; sourceTree = "<group>"; };
-		9C821A161FA146240094C623 /* EventBottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBottomSheetVC.swift; sourceTree = "<group>"; };
 		9C821A181FA146450094C623 /* ImageAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAnnotationView.swift; sourceTree = "<group>"; };
 		9C821A1A1FA250130094C623 /* EventBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBottomSheetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,7 +99,6 @@
 				9C2252991F98EB5B0029C818 /* LaunchScreen.storyboard */,
 				9C22529C1F98EB5B0029C818 /* Info.plist */,
 				9C2252AC1F9924B40029C818 /* GoogleService-Info.plist */,
-				9C821A1A1FA250130094C623 /* EventBottomSheetView.swift */,
 			);
 			path = nuspace;
 			sourceTree = "<group>";
@@ -112,7 +109,7 @@
 				9C2252B01F9C395B0029C818 /* ListVC.swift */,
 				9C2252A71F991D580029C818 /* MapVC.swift */,
 				9C2252A91F991DB80029C818 /* EventPageVC.swift */,
-				9C821A161FA146240094C623 /* EventBottomSheetVC.swift */,
+				9C821A1A1FA250130094C623 /* EventBottomSheetView.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -290,7 +287,6 @@
 				9C2252B11F9C395B0029C818 /* ListVC.swift in Sources */,
 				9C2252A31F98ED860029C818 /* TabBarController.swift in Sources */,
 				9C821A191FA146450094C623 /* ImageAnnotationView.swift in Sources */,
-				9C821A171FA146240094C623 /* EventBottomSheetVC.swift in Sources */,
 				9C821A151F9FE8DC0094C623 /* DistantAnnotationView.swift in Sources */,
 				9C2252AA1F991DB80029C818 /* EventPageVC.swift in Sources */,
 				9C2252A81F991D580029C818 /* MapVC.swift in Sources */,

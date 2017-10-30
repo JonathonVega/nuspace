@@ -270,7 +270,6 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
                         print(title)
                         filteredData.append(annotation)
                     }
-                    
                 }
             }
             print("Filtered")
@@ -307,9 +306,6 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
         print("Second")
     }
     
-    
-    
-    
     // Exit SearchBar Keyboard when touching screen
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
@@ -321,8 +317,6 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
     @IBAction func refreshMap(_ sender: UIButton) {
         fillMapViewWithAnnotationsFromFirebase()
     }
-    
-    
     
     func isCoordinateInsideRegion(region: MKCoordinateRegion, coordinate: CLLocationCoordinate2D) -> Bool {
         let southEdge = region.center.latitude - (region.span.latitudeDelta/2)
