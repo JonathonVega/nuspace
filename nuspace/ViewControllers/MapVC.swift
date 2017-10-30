@@ -212,7 +212,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
     func fillMapViewWithAnnotationsFromFirebase() {
         var annotationsArray = [Event]()
         ref.child("Events").observeSingleEvent(of: .value) { (snapshot) in
-            self.mapView.removeAnnotations(self.mapAnnotations)
+            self.mapView.removeAnnotations(self.mapView.annotations)
             if ( snapshot.value is NSNull ) {
                 print("not found")
             } else {
