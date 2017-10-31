@@ -25,11 +25,15 @@ class TabBarController: UITabBarController {
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor(white: 0.0, alpha: 1.0).cgColor
         self.view.insertSubview(button, aboveSubview: self.tabBar)
+        
+        if let arrayOfTabBarItems = self.tabBar.items as AnyObject as? NSArray,let tabBarItem = arrayOfTabBarItems[2] as? UITabBarItem {
+            tabBarItem.isEnabled = false
+        }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        button.frame = CGRect.init(x: self.tabBar.center.x - 40, y: self.view.bounds.height - 50, width: 80, height: 50)
+        button.frame = CGRect.init(x: self.tabBar.center.x - 20, y: self.view.bounds.height - 47.5, width: 45, height: 45)
         button.layer.cornerRadius = 10
     }
     

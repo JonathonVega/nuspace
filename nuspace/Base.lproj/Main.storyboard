@@ -111,7 +111,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="957-2s-QkM">
-                                                    <rect key="frame" x="8" y="0.0" width="359" height="68"/>
+                                                    <rect key="frame" x="103" y="0.0" width="264" height="68"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cie-V7-Zbw">
@@ -128,6 +128,10 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hmk-OG-9lS">
+                                                    <rect key="frame" x="8" y="0.0" width="48" height="48"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -324,7 +328,7 @@
         <image name="refreshButton" width="240" height="240"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oPp-7K-eot"/>
-        <segue reference="v7t-j2-FsM"/>
+        <segue reference="ZhG-fD-wY3"/>
+        <segue reference="Tyq-NL-EUb"/>
     </inferredMetricsTieBreakers>
 </document>

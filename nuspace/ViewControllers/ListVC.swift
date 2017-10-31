@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 import FirebaseDatabase
 
 class ListVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
@@ -25,7 +26,7 @@ class ListVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
         
         ref = Database.database().reference()
         
-        searchBar.placeholder = "Search for Places"
+        searchBar.placeholder = "Search"
         tableView.delegate = self
         tableView.dataSource = self
         searchBar.delegate = self
@@ -41,7 +42,7 @@ class ListVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -54,6 +55,33 @@ class ListVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
         // Configure the cell...
         
         return cell
+    }
+    
+    func getDataFromFirebase() {
+        ref.child("Events").observeSingleEvent(of: .value) { (snapshot) in
+            if ( snapshot.value is NSNull ) {
+                print("not found")
+            } else {
+                
+                for child in (snapshot.children) {
+                    
+                    let snap = child as! DataSnapshot //each child is a snapshot
+                    let dict = snap.value as! [String: Any] // the value is a dict
+                    
+                    let title = dict["EventTitle"] as! String
+                    let locationName = dict["EventLocation"] as! String
+                    let eventDescription = dict["EventDescription"] as! String
+                    let longitude = dict["Longitude"] as! Double
+                    let latitude = dict["Latitude"] as! Double
+                    
+                    let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                    
+                    
+                    let event = Event(title: title, locationName: locationName, eventDescription: eventDescription, coordinate: location)
+                    print(title)
+                }
+            }
+        }
     }
     
 

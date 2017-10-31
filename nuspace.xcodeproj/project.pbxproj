@@ -95,6 +95,7 @@
 				9C2252B21F9C3C670029C818 /* ViewControllers */,
 				9C2252B31F9C42A50029C818 /* Model */,
 				9C2252B61F9C43560029C818 /* Table View Cells */,
+				9C821A1A1FA250130094C623 /* EventBottomSheetView.swift */,
 				9C2252971F98EB5B0029C818 /* Assets.xcassets */,
 				9C2252991F98EB5B0029C818 /* LaunchScreen.storyboard */,
 				9C22529C1F98EB5B0029C818 /* Info.plist */,
@@ -109,7 +110,6 @@
 				9C2252B01F9C395B0029C818 /* ListVC.swift */,
 				9C2252A71F991D580029C818 /* MapVC.swift */,
 				9C2252A91F991DB80029C818 /* EventPageVC.swift */,
-				9C821A1A1FA250130094C623 /* EventBottomSheetView.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
