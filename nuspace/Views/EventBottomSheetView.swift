@@ -22,7 +22,7 @@ class EventBottomSheetView: UIView {
         self.event = event
         let screenSize = UIScreen.main.bounds
         let tabBarHeight:CGFloat = 49.0
-        super.init(frame: CGRect(x: 0, y: UIScreen.main.bounds.height - (tabBarHeight + 100), width: screenSize.width, height: 200))//screenSize.height))
+        super.init(frame: CGRect(x: 0, y: UIScreen.main.bounds.height - (tabBarHeight + 101), width: screenSize.width, height: 200))//screenSize.height))
         
         //self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(panGesture(recognizer:))))
         let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(panGesture))
@@ -64,16 +64,33 @@ class EventBottomSheetView: UIView {
         
         
         let eventTitle = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 21))
-        eventTitle.center = CGPoint(x: 150, y: 30)
+        eventTitle.center = CGPoint(x: 225, y: 30)
         eventTitle.textAlignment = .left
+        eventTitle.font = UIFont(name: eventTitle.font.fontName, size: 12)
         eventTitle.text = "Event: " + (event?.title)!
         self.addSubview(eventTitle)
         
-        let eventLocation = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 21))
-        eventLocation.center = CGPoint(x: 150, y: 50)
-        eventLocation.textAlignment = .left
-        eventLocation.text = "Location: " + (event?.locationName)!
-        self.addSubview(eventLocation)
+        let eventDescription = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 21))
+        eventDescription.center = CGPoint(x: 225, y: 50)
+        eventDescription.textAlignment = .left
+        eventDescription.font = UIFont(name: eventDescription.font.fontName, size: 12)
+        eventDescription.text = "Description: " + (event?.eventDescription)!
+        eventDescription.numberOfLines = 0
+        eventDescription.sizeToFit()
+        self.addSubview(eventDescription)
+        
+        let userImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 64, height: 64))
+        userImageView.image = event?.image
+        userImageView.center = CGPoint(x: 35, y: 50)
+        userImageView.layer.cornerRadius = 32.0
+        userImageView.layer.masksToBounds = true
+        self.addSubview(userImageView)
+        
+        let username = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 21))
+        username.center = CGPoint(x: 65, y: 90)
+        username.font = UIFont(name: username.font.fontName, size: 12)
+        username.text = "@User1"
+        self.addSubview(username)
     }
     
     @objc func panGesture(recognizer: UIPanGestureRecognizer) {
@@ -85,7 +102,7 @@ class EventBottomSheetView: UIView {
         let velocity = recognizer.velocity(in: self)
 
         if ( y + translation.y >= fullView) && (y + translation.y <= partialView) {
-            print(translation.y + y)
+            //print(translation.y + y)
             self.frame = CGRect(x: 0, y: y + translation.y, width: self.frame.width, height: self.frame.height)
             recognizer.setTranslation(CGPoint.zero, in: self)
         }
@@ -109,13 +126,5 @@ class EventBottomSheetView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
 
 }

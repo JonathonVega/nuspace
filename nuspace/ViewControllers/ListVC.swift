@@ -14,8 +14,11 @@ class ListVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
 
     @IBOutlet weak var tableView: UITableView!
     
+    var onActivity = true // true for activity, false for discover
     
     var searchBar:UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 440, height: 40))
+    
+    //var activityArray:
     
     var ref: DatabaseReference!
     
@@ -50,7 +53,7 @@ class ListVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Post", for: indexPath)
         
         // Configure the cell...
         
@@ -83,6 +86,4 @@ class ListVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
             }
         }
     }
-    
-
 }

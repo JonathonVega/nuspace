@@ -31,6 +31,7 @@ class ImageAnnotationView: MKAnnotationView {
             self.imageView.image = newValue
         }
     }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

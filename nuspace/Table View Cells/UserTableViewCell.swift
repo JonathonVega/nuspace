@@ -1,5 +1,5 @@
 //
-//  EntityTableViewCell.swift
+//  UserTableViewCell.swift
 //  nuspace
 //
 //  Created by Jonathon F Vega on 10/22/17.
@@ -8,8 +8,12 @@
 
 import UIKit
 
-class EntityTableViewCell: UITableViewCell {
+class UserTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var NameLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

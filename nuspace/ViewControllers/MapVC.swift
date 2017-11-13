@@ -21,7 +21,6 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var bottomSheet: UIView!
     
-    
     let locationManager = CLLocationManager()
     var searchBar:UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 440, height: 40))
     
