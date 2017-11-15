@@ -31,6 +31,11 @@ class Profile_EventsVC: UIViewController, UIScrollViewDelegate, UITableViewDeleg
         eventsTableView.isScrollEnabled = false
         //eventsTableView.frame = CGRect(x: 0, y: eventsTableView.frame.minY, width: eventsTableView.frame.width, height: eventsTableView.contentSize.height)
         eventsTableView.frame = CGRect(x: 0, y: eventsTableView.frame.minY, width: eventsTableView.frame.width, height: screenHeight - 146)
+        
+        eventsTableView.tableFooterView = UIView()
+        
+        setupTapRecognizers()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,13 +57,6 @@ class Profile_EventsVC: UIViewController, UIScrollViewDelegate, UITableViewDeleg
                 self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: eventsTableView.frame.minY + eventsTableView.frame.height)//CGRect(x: 0, y: 0, width: self.scrollView.frame.width, height: eventsTableView.frame.minY + eventsTableView.frame.height)
             }
         }
-        
-        /*if scrollView == self.eventsTableView {
-            if yOffset == 0 {
-                self.scrollView.isScrollEnabled = true
-                self.eventsTableView.isScrollEnabled = false
-            }
-        }*/
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -66,7 +64,7 @@ class Profile_EventsVC: UIViewController, UIScrollViewDelegate, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 25
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -76,15 +74,29 @@ class Profile_EventsVC: UIViewController, UIScrollViewDelegate, UITableViewDeleg
         
         return cell
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func setupTapRecognizers() {
+        let profileTap = UITapGestureRecognizer.init(target: self, action: #selector(handleProfileTap))
+        profileTap.delegate = self as? UIGestureRecognizerDelegate
+        profileView.addGestureRecognizer(profileTap)
+        
+        let organizationsTap = UITapGestureRecognizer.init(target: self, action: #selector(handleOrganizationsTap))
+        organizationsTap.delegate = self as? UIGestureRecognizerDelegate
+        organizationsView.addGestureRecognizer(organizationsTap)
     }
-    */
+    
+    //MARK: - Handle Gesture Recognizers
+    
+    @objc func handleProfileTap(gestureRecognizer: UIGestureRecognizer) {
+        performSegue(withIdentifier: "toMyProfileSegue", sender: self)
+    }
+    
+    @objc func handleOrganizationsTap(gestureRecognizer: UIGestureRecognizer) {
+        performSegue(withIdentifier: "toOrganizationsSegue", sender: self)
+    }
+    
+    /*func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toMyProfileSegue"
+    }*/
 
 }
