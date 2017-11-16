@@ -242,7 +242,7 @@
                     </view>
                     <connections>
                         <outlet property="scrollView" destination="52y-Lq-jLH" id="s7Q-fk-F4v"/>
-                        <segue destination="UHW-H2-4T9" kind="presentation" identifier="signInSegue" id="4yk-EU-3Te"/>
+                        <segue destination="UHW-H2-4T9" kind="show" identifier="loginSegue" id="4yk-EU-3Te"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="el0-ER-mVx" userLabel="First Responder" sceneMemberID="firstResponder"/>
