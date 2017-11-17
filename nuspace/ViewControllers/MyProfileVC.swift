@@ -7,12 +7,12 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class MyProfileVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 

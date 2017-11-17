@@ -37,12 +37,17 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         
         scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width * 2, height: scrollView.bounds.size.height)
         scrollView.isPagingEnabled = true
+        
         setupLoginView()
         setupRegisterView()
         
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(handleTap))
         tap.delegate = self as? UIGestureRecognizerDelegate
         self.view.addGestureRecognizer(tap)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        checkForCurrentUser()
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,6 +69,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         loginEmailTextField?.layer.borderWidth = 1.0
         loginEmailTextField?.layer.borderColor = UIColor.darkGray.cgColor
         loginEmailTextField?.layer.cornerRadius = 10
+        loginEmailTextField?.keyboardType = .emailAddress
         loginView?.addSubview(loginEmailTextField!)
         loginEmailTextField?.delegate = self
         
@@ -111,17 +117,18 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         registerView?.addSubview(registerUsernameTextField!)
         registerUsernameTextField?.delegate = self
         
-        // emailRegisterTextField
+        // registerEmailTextField
         registerEmailTextField = UITextField(frame: CGRect(x: 0, y: 0, width: (loginView?.frame.width)! - 20, height: 30))
         registerEmailTextField?.placeholder = "Email"
         registerEmailTextField?.center = CGPoint(x: (loginView?.bounds.width)!/2, y: ((loginView?.bounds.height)!/2) + 20)
         registerEmailTextField?.layer.borderWidth = 1.0
         registerEmailTextField?.layer.borderColor = UIColor.darkGray.cgColor
         registerEmailTextField?.layer.cornerRadius = 10
+        registerEmailTextField?.keyboardType = .emailAddress
         registerView?.addSubview(registerEmailTextField!)
         registerEmailTextField?.delegate = self
         
-        // passwordRegisterTextField
+        // registerPasswordTextField
         registerPasswordTextField = UITextField(frame: CGRect(x: 0, y: 0, width: (loginView?.frame.width)! - 20, height: 30))
         registerPasswordTextField?.placeholder = "Password"
         registerPasswordTextField?.center = CGPoint(x: (loginView?.bounds.width)!/2, y: ((loginView?.bounds.height)!/2) + 60)
@@ -134,7 +141,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         let registerButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
         registerButton.titleLabel?.text = "Login"
         registerButton.backgroundColor = UIColor.blue
-        registerButton.center = CGPoint(x: registerView!.bounds.width/2, y: registerView!.bounds.maxY - 100)
+        registerButton.center = CGPoint(x: registerView!.bounds.width/2, y: registerView!.bounds.maxY - 50)
         registerButton.addTarget(self, action: #selector(registerUser), for: .touchUpInside)
         registerView?.addSubview(registerButton)
         
@@ -145,25 +152,35 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     // MARK: - Button Actions
     
     @objc func loginUser(button: UIButton) {
-        loginUserFromFirebase()
-        performSegue(withIdentifier: "loginSegue", sender: self)
+        if (loginEmailTextField?.text?.isEmpty)! || (loginPasswordTextField?.text?.isEmpty)! {
+            print("One of the fields are missing") // TODO: Add warnings on UI
+        } else {
+            loginUserFromFirebase()
+            
+        }
     }
     
     @objc func registerUser(button: UIButton) {
         registerUserToFirebase()
-        performSegue(withIdentifier: "loginSegue", sender: self)
+        
     }
     
     
     // MARK: - Firebase Call Methods
+    
+    func checkForCurrentUser() {
+        if Auth.auth().currentUser != nil {
+            self.performSegue(withIdentifier: "loginSegue", sender: self)
+        }
+    }
     
     func loginUserFromFirebase() {
         if let email=loginEmailTextField?.text, let password=loginPasswordTextField?.text {
             Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
                 if user != nil {
                     print(user!.uid)
-                }
-                else {
+                    self.performSegue(withIdentifier: "loginSegue", sender: self)
+                } else {
                     
                     if let errCode = AuthErrorCode(rawValue: (error! as NSError).code){
                         
@@ -183,7 +200,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                     }
                     
                     print(error!)
-                    
                 }
             })
         }
@@ -194,9 +210,9 @@ class LoginVC: UIViewController, UITextFieldDelegate {
             Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
                 if user != nil {
                     
-                    let data: Dictionary<String, Any> = ["email": email, "password": password, "name": name, "username":username, "dateCreated":Date().timeIntervalSince1970]
-                    Database.database().reference().child("users").child(user!.uid).setValue(data)
-                    
+                    let data: Dictionary<String, Any> = ["email": email, "password": password, "name": name, "username":username, "dateCreated":Date().timeIntervalSince1970] // Call date using "var date = NSDate(timeIntervalSince1970: interval)"
+                    self.ref.child("users").child(user!.uid).setValue(data)
+                    self.performSegue(withIdentifier: "loginSegue", sender: self)
                     
                 } else {
                     

@@ -7,11 +7,21 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import FirebaseAuth
 
 class Profile_EventsVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource {
+    
+    var ref: DatabaseReference!
 
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var containterViewHeight: NSLayoutConstraint!
+    
     @IBOutlet weak var profileView: UIView!
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var profileNameLabel: UILabel!
+    
     @IBOutlet weak var organizationsView: UIView!
     @IBOutlet weak var eventsTableView: UITableView!
     
@@ -21,6 +31,8 @@ class Profile_EventsVC: UIViewController, UIScrollViewDelegate, UITableViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        ref = Database.database().reference()
+        
         // Do any additional setup after loading the view.
         scrollView.contentSize = CGSize(width: scrollView.contentSize.width, height: 787)//scrollViewContentHeight)
         scrollView.delegate = self
@@ -29,13 +41,9 @@ class Profile_EventsVC: UIViewController, UIScrollViewDelegate, UITableViewDeleg
         scrollView.bounces = false
         eventsTableView.bounces = false
         eventsTableView.isScrollEnabled = false
-        //eventsTableView.frame = CGRect(x: 0, y: eventsTableView.frame.minY, width: eventsTableView.frame.width, height: eventsTableView.contentSize.height)
-        eventsTableView.frame = CGRect(x: 0, y: eventsTableView.frame.minY, width: eventsTableView.frame.width, height: screenHeight - 146)
-        
-        eventsTableView.tableFooterView = UIView()
-        
+        print("Does it hit this?")
+        getProfileDataFromFirebase()
         setupTapRecognizers()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,18 +51,15 @@ class Profile_EventsVC: UIViewController, UIScrollViewDelegate, UITableViewDeleg
         // Dispose of any resources that can be recreated.
     }
     
+    // Changes scrollView size depending on size of tableView
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let yOffset = scrollView.contentOffset.y
-        print(yOffset)
         if scrollView == self.scrollView {
             if yOffset > 0 {//yOffset >= scrollViewContentHeight - screenHeight {
-                print("hit")
-                print(scrollViewContentHeight - screenHeight)
-                //scrollView.isScrollEnabled = false
-                //eventsTableView.isScrollEnabled = true
-                
-                eventsTableView.frame = CGRect(x: 0, y: eventsTableView.frame.minY, width: eventsTableView.frame.width, height: eventsTableView.contentSize.height)
-                self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: eventsTableView.frame.minY + eventsTableView.frame.height)//CGRect(x: 0, y: 0, width: self.scrollView.frame.width, height: eventsTableView.frame.minY + eventsTableView.frame.height)
+                print("It hits this")
+                /*eventsTableView.frame = CGRect(x: 0, y: eventsTableView.frame.minY, width: eventsTableView.frame.width, height: eventsTableView.contentSize.height)
+                self.containerView.frame = CGRect(x: 0, y: 0, width: containerView.frame.width, height: eventsTableView.frame.minY + eventsTableView.frame.height)
+                self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: eventsTableView.frame.minY + eventsTableView.frame.height)*///CGRect(x: 0, y: 0, width: self.scrollView.frame.width, height: eventsTableView.frame.minY + eventsTableView.frame.height)
             }
         }
     }
@@ -72,8 +77,42 @@ class Profile_EventsVC: UIViewController, UIScrollViewDelegate, UITableViewDeleg
         
         // Configure the cell...
         
+        self.containterViewHeight.constant = eventsTableView.frame.minY + eventsTableView.contentSize.height // Adjusts height so eventsTable can be scrolled down
+        
         return cell
     }
+    
+    
+    // MARK: - Firebase Call Methods
+    
+    func getProfileDataFromFirebase() {
+        let userID = Auth.auth().currentUser?.uid
+        ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            //print(value!)
+            let name = value?["name"] as? String ?? ""
+            //print(name)
+            self.profileNameLabel.text = name
+            if let image = value?["profileImage"] as? String {
+                // TODO: Fill out later when working with Firebase Storage
+                print("Nothing Should be coming out")
+            } else {
+                print("Oh no, no picture")
+                // TODO: Fill out later when working with Firebase Storage
+            }
+        })
+    }
+    
+    func getOrganizationsDataFromFirebase() {
+        
+    }
+    
+    func getEventsDataFromFirebase() {
+        
+    }
+    
+    
+    //MARK: - Gesture Recognizers
     
     func setupTapRecognizers() {
         let profileTap = UITapGestureRecognizer.init(target: self, action: #selector(handleProfileTap))
@@ -84,8 +123,6 @@ class Profile_EventsVC: UIViewController, UIScrollViewDelegate, UITableViewDeleg
         organizationsTap.delegate = self as? UIGestureRecognizerDelegate
         organizationsView.addGestureRecognizer(organizationsTap)
     }
-    
-    //MARK: - Handle Gesture Recognizers
     
     @objc func handleProfileTap(gestureRecognizer: UIGestureRecognizer) {
         performSegue(withIdentifier: "toMyProfileSegue", sender: self)
