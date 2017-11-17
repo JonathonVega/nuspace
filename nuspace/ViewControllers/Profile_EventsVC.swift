@@ -16,7 +16,7 @@ class Profile_EventsVC: UIViewController, UIScrollViewDelegate, UITableViewDeleg
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var containterViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var containerViewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var profileView: UIView!
     @IBOutlet weak var profileImage: UIImageView!
@@ -69,7 +69,7 @@ class Profile_EventsVC: UIViewController, UIScrollViewDelegate, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 25
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,7 +77,7 @@ class Profile_EventsVC: UIViewController, UIScrollViewDelegate, UITableViewDeleg
         
         // Configure the cell...
         
-        self.containterViewHeight.constant = eventsTableView.frame.minY + eventsTableView.contentSize.height // Adjusts height so eventsTable can be scrolled down
+        self.containerViewHeight.constant = eventsTableView.frame.minY + eventsTableView.contentSize.height // Adjusts height so eventsTable can be scrolled down
         
         return cell
     }
@@ -96,6 +96,7 @@ class Profile_EventsVC: UIViewController, UIScrollViewDelegate, UITableViewDeleg
             if let image = value?["profileImage"] as? String {
                 // TODO: Fill out later when working with Firebase Storage
                 print("Nothing Should be coming out")
+                print(image)
             } else {
                 print("Oh no, no picture")
                 // TODO: Fill out later when working with Firebase Storage
