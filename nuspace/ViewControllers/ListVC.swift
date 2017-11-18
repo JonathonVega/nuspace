@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import FirebaseDatabase
 
-class ListVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class ListVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -18,7 +18,8 @@ class ListVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
     
     var searchBar:UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 440, height: 40))
     
-    //var activityArray:
+    var activityArray: Array<Post>?
+    var discoverArray: Array<Post>?
     
     var ref: DatabaseReference!
     
@@ -77,10 +78,12 @@ class ListVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
                     let longitude = dict["Longitude"] as! Double
                     let latitude = dict["Latitude"] as! Double
                     
-                    let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                    let eventLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                     
                     
-                    let event = Event(title: title, locationName: locationName, eventDescription: eventDescription, coordinate: location)
+                    
+                    
+                    let event = Event(title: title, locationName: locationName, eventDescription: eventDescription, coordinate: eventLocation)
                     print(title)
                 }
             }
