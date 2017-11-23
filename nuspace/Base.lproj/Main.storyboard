@@ -411,7 +411,11 @@
                         <viewLayoutGuide key="safeArea" id="4sb-b7-LbL"/>
                     </view>
                     <navigationItem key="navigationItem" id="DuW-zL-FdA">
-                        <barButtonItem key="rightBarButtonItem" title="Settings" id="4fL-kj-uQa"/>
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="4fL-kj-uQa">
+                            <connections>
+                                <action selector="settingsButton:" destination="gfm-DM-vz0" id="7uX-sa-Wze"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="containerView" destination="9Oc-bC-9bc" id="27o-Ia-uNm"/>
@@ -455,10 +459,10 @@
             </objects>
             <point key="canvasLocation" x="2285.5" y="850.5"/>
         </scene>
-        <!--View Controller-->
+        <!--SettingsVC-->
         <scene sceneID="JCN-Xa-vFE">
             <objects>
-                <viewController id="gcO-sR-5kT" sceneMemberID="viewController">
+                <viewController id="gcO-sR-5kT" customClass="SettingsVC" customModule="nuspace" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Wcy-53-pPJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -467,11 +471,17 @@
                                 <rect key="frame" x="158" y="444" width="58" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Log-Out"/>
+                                <connections>
+                                    <action selector="logoutUser:" destination="gcO-sR-5kT" eventType="touchUpInside" id="nar-k4-StG"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="sp3-yu-bT7"/>
                     </view>
+                    <connections>
+                        <segue destination="q1d-ot-jes" kind="presentation" id="rgw-tn-WWJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u8v-qg-OxW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -592,9 +602,9 @@
                                                     <constraint firstAttribute="height" constant="28" id="oqg-lQ-GJr"/>
                                                 </constraints>
                                                 <segments>
-                                                    <segment title="First"/>
-                                                    <segment title="Second"/>
-                                                    <segment title="Third"/>
+                                                    <segment title="Posts"/>
+                                                    <segment title="Media"/>
+                                                    <segment title="Favorites"/>
                                                 </segments>
                                             </segmentedControl>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nhW-P5-dhA">
@@ -658,7 +668,13 @@
                         <viewLayoutGuide key="safeArea" id="w7B-NL-MBv"/>
                     </view>
                     <connections>
+                        <outlet property="bioLabel" destination="qbu-CM-4d8" id="DV8-fQ-sZa"/>
                         <outlet property="containerViewHeight" destination="Bv5-X7-bKA" id="Wvj-ag-Wda"/>
+                        <outlet property="followersNumberLabel" destination="5d2-2f-ldZ" id="H8S-zg-YTK"/>
+                        <outlet property="followingNumberLabel" destination="0JE-CM-iQ1" id="UPb-Np-zmz"/>
+                        <outlet property="profileImage" destination="us0-7m-VJO" id="Ejg-mX-uIP"/>
+                        <outlet property="profileName" destination="Y3v-mO-jYR" id="6bZ-dv-VOA"/>
+                        <outlet property="profileUsername" destination="gVh-gJ-D6v" id="p9g-Nf-rCi"/>
                         <outlet property="profileView" destination="TtA-4v-EiO" id="dAW-Ub-Dlz"/>
                         <outlet property="scrollView" destination="TFo-ss-ysv" id="5eV-7e-rBg"/>
                         <outlet property="tableView" destination="nhW-P5-dhA" id="vfz-QW-Wed"/>
@@ -731,6 +747,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ZhG-fD-wY3"/>
-        <segue reference="Tyq-NL-EUb"/>
+        <segue reference="v7t-j2-FsM"/>
     </inferredMetricsTieBreakers>
 </document>

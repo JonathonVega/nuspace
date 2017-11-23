@@ -9,10 +9,12 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
+import FirebaseStorage
 
 class Profile_EventsVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource {
     
-    var ref: DatabaseReference!
+    var databaseRef: DatabaseReference!
+    var storage: Storage!
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var containerView: UIView!
@@ -31,7 +33,8 @@ class Profile_EventsVC: UIViewController, UIScrollViewDelegate, UITableViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        ref = Database.database().reference()
+        databaseRef = Database.database().reference()
+        storage = Storage.storage()
         
         // Do any additional setup after loading the view.
         scrollView.contentSize = CGSize(width: scrollView.contentSize.width, height: 787)//scrollViewContentHeight)
@@ -87,7 +90,7 @@ class Profile_EventsVC: UIViewController, UIScrollViewDelegate, UITableViewDeleg
     
     func getProfileDataFromFirebase() {
         let userID = Auth.auth().currentUser?.uid
-        ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+        databaseRef.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             //print(value!)
             let name = value?["name"] as? String ?? ""
@@ -99,6 +102,18 @@ class Profile_EventsVC: UIViewController, UIScrollViewDelegate, UITableViewDeleg
                 print(image)
             } else {
                 print("Oh no, no picture")
+                //let defaultProfileImageRef = Storage.storage(url: "gs://nuspace-a5b5b.appspot.com/DefaultUserImage.png")
+                let spaceRef = self.storage.reference(forURL: "gs://nuspace-a5b5b.appspot.com/DefaultUserImage.png")
+                spaceRef.getData(maxSize: 1 * 1024 * 1024, completion: { (data, error) in
+                    if let error = error {
+                        print(error)
+                        // Uh-oh, an error occurred!
+                    } else {
+                        // Data for "images/island.jpg" is returned
+                        self.profileImage.image = UIImage(data: data!)
+                    }
+                })
+
                 // TODO: Fill out later when working with Firebase Storage
             }
         })
@@ -133,8 +148,10 @@ class Profile_EventsVC: UIViewController, UIScrollViewDelegate, UITableViewDeleg
         performSegue(withIdentifier: "toOrganizationsSegue", sender: self)
     }
     
-    /*func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toMyProfileSegue"
-    }*/
+
+    @IBAction func settingsButton(_ sender: Any) {
+        performSegue(withIdentifier: "toSettingsSegue", sender: self)
+    }
+    
 
 }

@@ -15,7 +15,12 @@ class MyProfileVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, 
     
     @IBOutlet weak var containerViewHeight: NSLayoutConstraint!
     @IBOutlet weak var profileView: UIView!
-    
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var profileName: UILabel!
+    @IBOutlet weak var profileUsername: UILabel!
+    @IBOutlet weak var followersNumberLabel: UILabel!
+    @IBOutlet weak var followingNumberLabel: UILabel!
+    @IBOutlet weak var bioLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
