@@ -59,10 +59,7 @@ class Profile_EventsVC: UIViewController, UIScrollViewDelegate, UITableViewDeleg
         let yOffset = scrollView.contentOffset.y
         if scrollView == self.scrollView {
             if yOffset > 0 {//yOffset >= scrollViewContentHeight - screenHeight {
-                print("It hits this")
-                /*eventsTableView.frame = CGRect(x: 0, y: eventsTableView.frame.minY, width: eventsTableView.frame.width, height: eventsTableView.contentSize.height)
-                self.containerView.frame = CGRect(x: 0, y: 0, width: containerView.frame.width, height: eventsTableView.frame.minY + eventsTableView.frame.height)
-                self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: eventsTableView.frame.minY + eventsTableView.frame.height)*///CGRect(x: 0, y: 0, width: self.scrollView.frame.width, height: eventsTableView.frame.minY + eventsTableView.frame.height)
+                //print("It hits this")
             }
         }
     }
@@ -151,6 +148,10 @@ class Profile_EventsVC: UIViewController, UIScrollViewDelegate, UITableViewDeleg
 
     @IBAction func settingsButton(_ sender: Any) {
         performSegue(withIdentifier: "toSettingsSegue", sender: self)
+    }
+    
+    @IBAction func addEvent(_ sender: Any) {
+        performSegue(withIdentifier: "segueToCreateEvent", sender: self)
     }
     
 

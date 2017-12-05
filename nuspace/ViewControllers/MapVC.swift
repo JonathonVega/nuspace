@@ -282,13 +282,6 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        // Activity Indicator
-        /*let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-        activityIndicator.center = self.view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.startAnimating()*/
-        
         // Hide search bar
         self.searchBar.resignFirstResponder()
         dismiss(animated: true, completion: nil)
@@ -310,6 +303,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, M
         super.touchesBegan(touches, with: event)
         self.searchBar.endEditing(true)
     }
+    
     
     // MARK: - Other Methods
     
